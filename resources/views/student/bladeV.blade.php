@@ -6,6 +6,16 @@
  * Copyright © ENUCP Inc.All rights reserved.
  */
 ?>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    axios.get('http://a.com/student/model/all')
+        .then(function (response) {
+            console.log(response);
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+</script>
 @extends('student.layouts')
 
 @section('header')
