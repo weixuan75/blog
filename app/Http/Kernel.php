@@ -7,8 +7,9 @@ use Illuminate\Foundation\Http\Kernel as HttpKernel;
 class Kernel extends HttpKernel
 {
     /**
+     * 应用程序的全局HTTP中间件堆栈。
      * The application's global HTTP middleware stack.
-     *
+     * 这些中间件在应用程序的每个请求期间运行。
      * These middleware are run during every request to your application.
      *
      * @var array
@@ -23,6 +24,7 @@ class Kernel extends HttpKernel
     ];
 
     /**
+     * 应用程序的路由中间件组。
      * The application's route middleware groups.
      *
      * @var array
@@ -46,8 +48,9 @@ class Kernel extends HttpKernel
     ];
 
     /**
+     * 应用程序的路由中间件。
      * The application's route middleware.
-     *
+     * 这些中间件可以分配给组，也可以单独使用。
      * These middleware may be assigned to groups or used individually.
      *
      * @var array
