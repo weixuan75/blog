@@ -342,13 +342,43 @@ Route::group(['prefix' => 'student'], function () {
         ]);
         //Blade模板引擎 url
         Route::get('/url', [
-            'as' =>'bladeUrl',
+            'as' => 'bladeUrl',
             'uses' => 'StudentController@bladeUrl'
         ]);
     });
 
 });
 
+Route::group(['prefix' => 'c'], function () {
+    //新增
+    Route::get('/req', [
+        'uses' => 'StudentController@contReq'
+    ]);
+    //response
+
+    Route::get('/resp', [
+        'uses' => 'StudentController@contResp'
+    ]);
+
+    Route::get('/resp2', [
+        'uses' => 'StudentController@contResp2'
+    ]);
+
+});
+//添加中间件
+//Route::group(['middleware'=>['web']],function(){
+    //新增
+    Route::get('/session', [
+        'uses' => 'StudentController@contSession'
+    ]);
+    Route::get('/session2', [
+        'uses' => 'StudentController@contSession2'
+    ]);
+    Route::get('/session3', [
+        'as'=>'session3',
+        'uses' => 'StudentController@contSession3'
+    ]);
+//});
 
 Auth::routes();
 

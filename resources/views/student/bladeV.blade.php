@@ -76,8 +76,11 @@
         {{$a}}
     @endforeach
 
-    <br>模板中的URL：url() action() route()<br>
-    <a href="{{ url('url') }}"></a>
+    <br>模板中的URL： action() route()<br>
+    <a href="{{ url('student/blade/url') }}">url()连接</a>
+    <a href="{{ action('StudentController@bladeUrl') }}">action()控制器方法</a>
+    <a href="{{ route('bladeUrl') }}">route()别名</a>
+
 
 @stop
 @section('footer')

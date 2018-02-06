@@ -10,7 +10,9 @@
 namespace App\Http\Controllers;
 
 use App\ec\models\Student;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use Psy\Util\Json;
 
 class StudentController extends Controller
@@ -357,5 +359,112 @@ class StudentController extends Controller
         ]);
     }
 
+    //controller -> request
+//    public function req1(Request $request){
+    public function contReq(Request $request){
+        //1.取值
+//        echo $request->input('name');
+        //1.取值:添加默认值
+//        echo $request->input('name','游客');
+        //判断是否存在
+        var_dump($request->has('name'));
+        //获取所有值
+        var_dump($request->all());
+        //请求的类型
+        echo $request->method();
+        var_dump( $request->isMethod('GET'));
+        //判断请求路径
+        var_dump( $request->is('c/*'));
+        //获取当前URL
+        var_dump($request->url());
+        //获取客户IP地址
+        var_dump($request->ip());
+        var_dump($request->ips());
+    }
+    public function contResp(){
+        //响应JSON
+        $data = [
+            'errCode' =>0,
+            'errMsg' =>'success',
+            'data' => 'sean'
+        ];
+        return response()->json($data);
+    }
+    public function contResp2(){
+        //重定向
+//        return redirect('session2');
+        //重定向+传值
+        $data = [
+            'errCode' =>0,
+            'errMsg' =>'success',
+            'data' => 'sean'
+        ];
+//        return redirect('session2')->with(['arr3'=>$data]);
+        //使用action
+//        return redirect()->action('StudentController@contSession3')->with(['arr3'=>$data]);
+        //使用路由别名
+//        return redirect()->route('session3')->with(['arr3'=>$data]);
+        //返回上一个页面
+//        return redirect()->back();
+    }
 
+    //session
+    public function contSession(Request $request){
+        //HTTP request session
+        echo '赋值';//赋值
+        $request->session()->put('key1','value1');
+        //session 辅助函数
+        session()->put('key2','value2');
+        //Session facade
+        Session('key3','value3');
+        //取值不存在取默认值
+        echo session()->get("student",'default');
+        session()->put('key2','value2');
+        //session 存数组
+        Session(["arr2"=>['default']]);
+        //吧数据放到session的数组中
+        Session::push('arr2','sesan');
+        Session::push('arr2','aaca');
+    }
+    //session
+    public function contSession2(Request $request){
+        //HTTP request session
+        echo '取值';
+        echo $request->session()->get('key1');
+        //session 辅助函数
+        echo session()->get('key2');
+        //Session facade
+        echo Session('key3');
+        //pull 方法可以只用一条语句就从 Session 检索并且删除一个项目：
+        $pull = $request->session()->pull("student",'default');
+        echo $pull;
+
+        echo "<br>";
+        //判断session中指定的值是否存在
+        var_dump(Session::has(['key2','key1']));
+        //session 存数组
+        var_dump(Session('arr2'));
+        var_dump(Session('arr3'));
+    }
+    //取session所有值
+    public function contSession3(Request $request){
+        dd($request->session()->all());
+        var_dump(Session('arr3'));
+        //删除指定的session值
+        //$request->session()->forget('key1');
+        //删除所有
+        $request->session()->flush();
+    }
+    //活动宣传页
+    public function activity0(){
+        return '活动快要开始啦，敬请期待';
+    }
+    //活动宣进行中
+    public function activity1(){
+        return '互动进行中，谢谢参与1';
+    }
+    //活动宣进行中
+    public function activity2(){
+        return '互动进行中，谢谢参与2';
+    }
 }
